@@ -1,0 +1,54 @@
+name: Sync library from nizam-deepseek
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kits
+        uses: actions/checkout@v4
+        with:
+          path: kits
+
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          repository: slomai1/nizam-deepseek
+          path: source
+
+      - name: Copy library tree
+        run: |
+          set -euo pipefail
+          copy_tree() {
+            rm -rf "kits/$1"
+            cp -R "source/$1" "kits/$1"
+          }
+          copy_tree core
+          copy_tree docs
+          copy_tree templates
+          copy_tree tools
+          mkdir -p kits/install
+          find kits/install -maxdepth 1 -type f -name '*.js' -delete
+          if compgen -G "source/install/*.js" > /dev/null; then
+            cp source/install/*.js kits/install/
+          fi
+
+      - name: Commit library
+        working-directory: kits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add core docs templates tools install
+          if git diff --cached --quiet; then
+            echo "No library changes"
+          else
+            git commit -m "مزامنة مكتبة الملفات من nizam-deepseek"
+            git push
+          fi

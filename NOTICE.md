@@ -1,8 +1,9 @@
 # NOTICE
 
-`nizam-kits` مرجع حزم مشتق من [`slomai1/nizam-deepseek`](https://github.com/slomai1/nizam-deepseek).
+`nizam-kits` مكتبة مرجع مشتقة من [`slomai1/nizam-deepseek`](https://github.com/slomai1/nizam-deepseek).
 
-- المصدر الوحيد للتنفيذ هو `nizam-deepseek`
-- هذا المستودع لا يستبدل التثبيت الكامل ولا يكرر ملفات النظام
-- أي تعديل على سلوك الحوكمة أو الأوامر يُسجّل أولًا في المصدر
+- الأصل للتطوير والمثبّت الكامل: `nizam-deepseek`
+- هذا المستودع: تصفح + اختيار حزم عبر `scripts/pick.sh`
+- لا يُنسخ مثبّت النظام الكامل هنا
+- أي تعديل على السلوك يُسجّل أولًا في المصدر ثم تُزام المكتبة
 - الترخيص: MIT

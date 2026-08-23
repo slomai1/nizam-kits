@@ -1,26 +1,10 @@
 # نِظام Kits
 
-مرجع مفتوح لحزم [نِظام](https://github.com/slomai1/nizam-deepseek). تختار ما تحتاجه، ولا تثبّت الكل.
+مرجع مفتوح لمكتبة [نِظام](https://github.com/slomai1/nizam-deepseek). تختار ما تحتاجه، ولا تثبّت الكل.
 
-هذا المستودع **ليس** نسخة كاملة من النظام. المصدر الوحيد للكود هو [`slomai1/nizam-deepseek`](https://github.com/slomai1/nizam-deepseek).
+الأصل والمثبّت الكامل يبقيان في [`nizam-deepseek`](https://github.com/slomai1/nizam-deepseek). هذا المستودع يعرض الملفات للتصفح والنسخ الانتقائي.
 
-## اختر حزمة
-
-| الحزمة | ماذا تعطيك | الاعتماد |
-|---|---|---|
-| [`core`](packs/core/README.md) | حوكمة، خطافات حماية، قواعد التشغيل | إلزامية |
-| [`arabic`](packs/arabic/README.md) | شرح ومراجعة بالعربية + مهارة تصميم عربي | `core` |
-| [`memory`](packs/memory/README.md) | حفظ السياق والبحث في الذاكرة | `core` |
-| [`quality`](packs/quality/README.md) | تحقق، مراجعة، خطوط جودة | `core` |
-| [`worktrees`](packs/worktrees/README.md) | فروع عمل معزولة للمهام المتوازية | `core` |
-
-التفاصيل والملفات في [`CATALOG.md`](CATALOG.md).
-
-## طريقتان للأخذ
-
-### 1) سكربت الاختيار
-
-ينسخ فقط الحزم المختارة من مستودع المصدر إلى مجلد الوجهة:
+## المدخل
 
 ```bash
 git clone https://github.com/slomai1/nizam-kits.git
@@ -29,25 +13,46 @@ chmod +x scripts/pick.sh
 ./scripts/pick.sh --packs core,arabic --dest ~/.claude
 ```
 
-أمثلة أخرى:
+أمثلة:
 
 ```bash
-./scripts/pick.sh --packs core,memory,quality --dest ~/.claude
 ./scripts/pick.sh --list
+./scripts/pick.sh --packs core,memory,quality --dest ~/.claude
 ```
 
-السكربت يجلب نسخة محلية من `nizam-deepseek` أو ينسخها إلى مجلد مؤقت.
+إن وجدت شجرة `core/` هنا ينسخ منها. وإلا يجلب `nizam-deepseek`.
 
-### 2) نسخ يدوي
+## الحزم
 
-افتح مجلد الحزمة، اقرأ قائمة الملفات، وانسخ من
-[`nizam-deepseek`](https://github.com/slomai1/nizam-deepseek) ما تريده فقط.
+| الحزمة | المحتوى | الاعتماد |
+|---|---|---|
+| [`core`](packs/core/README.md) | حوكمة وخطافات حماية | إلزامية |
+| [`arabic`](packs/arabic/README.md) | شرح ومراجعة عربية | `core` |
+| [`memory`](packs/memory/README.md) | ذاكرة السياق | `core` |
+| [`quality`](packs/quality/README.md) | تحقق وجودة | `core` |
+| [`worktrees`](packs/worktrees/README.md) | فروع عمل معزولة | `core` |
 
-## ما لن تجده هنا
+القائمة الكاملة في [`CATALOG.md`](CATALOG.md).
 
-- لا يوجد مثبّت كامل ينسخ النظام دفعة واحدة
-- لا يوجد أسرار مشاريع خاصة ولا مفاتيح API
-- أوامر ووردبريس وبقية المهارات بقيت في المصدر إن احتجتها لاحقًا
+## مكتبة الملفات
+
+بعد المزامنة تظهر هذه المجلدات للتصفح:
+
+- `core/` أوامر، خطافات، قواعد، مهارات، وسير عمل
+- `docs/` مرجع التركيب والبنية
+- `templates/` قوالب الإعدادات والذاكرة
+- `tools/` اختبارات الخطافات والذاكرة
+
+لا يُنسخ `install.sh` ولا `install.ps1`.
+
+لتحديث المكتبة محليًا:
+
+```bash
+chmod +x scripts/sync.sh
+./scripts/sync.sh
+```
+
+أو شغّل ووركفلو `Sync library from nizam-deepseek` من تبويب Actions.
 
 ## الترخيص
 

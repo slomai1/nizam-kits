@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC_REPO="https://github.com/slomai1/nizam-deepseek.git"
 DEST="${HOME}/.claude"
 PACKS=""
@@ -108,6 +109,10 @@ done
 if [[ "$HAS_CORE" -eq 0 ]]; then
   echo "Adding required pack: core"
   SELECTED=("core" "${SELECTED[@]}")
+fi
+
+if [[ -z "$SRC_DIR" && -f "$ROOT/core/CLAUDE.md" ]]; then
+  SRC_DIR="$ROOT"
 fi
 
 if [[ -z "$SRC_DIR" ]]; then

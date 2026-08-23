@@ -1,6 +1,6 @@
 # كتالوج الحزم
 
-كل مسار أدناه نسبي إلى المصدر: [`slomai1/nizam-deepseek`](https://github.com/slomai1/nizam-deepseek).
+المسارات نسبية إلى جذر هذا المستودع بعد المزامنة، ومطابقة لـ [`nizam-deepseek`](https://github.com/slomai1/nizam-deepseek).
 
 ## core — إلزامي
 
@@ -47,10 +47,12 @@
 - `core/commands/worktree-new.md`
 - `core/commands/worktree-done.md`
 
-## خارج الكتالوج هذا
+## في المكتبة وليس في حزمة
 
-هذه الملفات تبقى في المصدر إن احتجتها لحالة محددة:
+تُنسخ للتصفح، وتُؤخذ يدويًا إن احتجتها:
 
-- `core/commands/wp-perf.md` و `core/commands/wp-perf-review.md`
-- `core/skills/auto-build` و `debugging-wizard` و `design-pipeline` و `feature-forge` و `spec-miner` و `checklist-ui`
-- بقية `core/workflows` مثل `sprint.js` و `freeze.js` و `land-and-deploy.js`
+- بقية `core/commands` و`core/skills` و`core/workflows`
+- `docs/`
+- `templates/`
+- `tools/`
+- `install/*.js` فقط — بدون `install.sh` و`install.ps1`
