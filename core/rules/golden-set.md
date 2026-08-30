@@ -7,13 +7,14 @@
 
 ## النماذج الأساسية
 
-| النموذج                 | الاستخدام                   | الاستدعاء       |
-| ----------------------- | --------------------------- | --------------- |
-| `deepseek-v4-flash[1m]` | الجلسة الرئيسية (الافتراضي) | `/model sonnet` |
-| `deepseek-v4-pro[1m]`   | تصعيد يدوي اختياري          | `/model opus`   |
+| النموذج                 | الاستخدام                  | الاستدعاء       |
+| ----------------------- | -------------------------- | --------------- |
+| `deepseek-v4-flash-vision-exp` | الجلسة الرئيسية (الافتراضي) | `/model sonnet` |
+| `deepseek-v4-flash[1m]` | الفلاش القياسي (خفيف/سريع) | `/model haiku` |
+| `deepseek-v4-pro[1m]` | تصعيد يدوي اختياري | `/model opus` |
 
-> **توجيه النموذج:** الجلسة الرئيسية `deepseek-v4-flash[1m]` (الافتراضي) — التنفيذ المباشر. التصعيد اليدوي إلى `deepseek-v4-pro[1m]` عبر `/model opus` متى شئت. فتحة `haiku` = flash.
-> **الوكلاء:** كلهم Flash (sonnet). `CLAUDE_CODE_EFFORT_LEVEL=high`.
+> **توجيه النموذج:** الجلسة الرئيسية `deepseek-v4-flash-vision-exp` (الافتراضي) — التنفيذ المباشر. التصعيد اليدوي إلى `deepseek-v4-pro[1m]` عبر `/model opus` متى شئت. فتحة `haiku` = `deepseek-v4-flash[1m]` (الفلاش القياسي).
+> **الوكلاء:** كلهم Flash (sonnet) منذ 2026-08-17. `CLAUDE_CODE_EFFORT_LEVEL=high`.
 
 ## الأدوات الأساسية
 
@@ -103,7 +104,6 @@
 | ------------------- | ------------------------------------------------------ |
 | `graphify`          | رسم بياني معرفي عبر `/graphify`                        |
 | `code-review-skill` | دعم مراجعة الكود                                       |
-| `auto-verify`       | تحقق تلقائي + تصحيح ذاتي للتغييرات                     |
 | `humanizer`         | جعل النص طبيعيًا                                       |
 | `auto-build`        | بناء مشروع كامل في الخلفية من وصف — يدوي فقط عند الطلب |
 | `design-pipeline`   | بوابة التصميم الموحدة — ترتّب كل مهارات التصميم كمراحل |
@@ -143,9 +143,7 @@
 ## قواعد الإدارة
 
 - **`auto-build` و `checklist-ui`**: أدوات جديدة مضافة — الاستدعاء يدوي فقط. لا تشغيل تلقائي.
-  - `/auto-build`: شغّل السكريبت مباشرة:
-    - PowerShell (Windows): `& "$HOME\.claude\scripts\auto-build.ps1" -Description "..." -Monitor`
-    - bash (macOS/Linux): `powershell -File "$HOME/.claude/scripts/auto-build.ps1" -Description "..." -Monitor` (يتطلب pwsh)
+  - `/auto-build`: شغّل السكريبت مباشرة: `& "$env:USERPROFILE\.claude\scripts\auto-build.ps1" -Description "..." -Monitor`
   - `/checklist-ui`: استرجع قائمة الفحص قبل إخراج أي واجهة
 
 - أي أداة خارج هذا الملف ليست ممنوعة، لكنها ليست افتراضية

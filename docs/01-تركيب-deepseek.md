@@ -31,7 +31,7 @@ Claude Code يتصل بـ Anthropic عبر نقطة نهاية متوافقة. �
 {
   "env": {
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-pro[1m]",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-flash[1m]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-flash-vision-exp",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-v4-flash[1m]"
   }
 }
@@ -50,7 +50,7 @@ Claude Code يتصل بـ Anthropic عبر نقطة نهاية متوافقة. �
 | فتحة `/model` | النموذج الفعلي          |
 | ------------- | ----------------------- |
 | `opus`        | `deepseek-v4-pro[1m]`   |
-| `sonnet`      | `deepseek-v4-flash[1m]` |
+| `sonnet`      | `deepseek-v4-flash-vision-exp` |
 | `haiku`       | `deepseek-v4-flash[1m]` |
 
 أسماء الفتحات توافقية مع واجهة Anthropic ولا تعكس النموذج الفعلي.
@@ -62,6 +62,24 @@ Claude Code يتصل بـ Anthropic عبر نقطة نهاية متوافقة. �
 ```
 CLAUDE_CODE_EFFORT_LEVEL=high
 ```
+
+## نافذة السياق (حد السياق)
+
+Claude Code يضغط السياق تلقائياً عندما يقترب من حدّه. نافذة الضغط تُضبط في `settings.json` — وتقبل صيغتين متكافئتين (const + env-var):
+
+```json
+{
+  "autoCompactWindow": 786432,
+  "env": {
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "786432"
+  }
+}
+```
+
+- **القيمة 786432 = 786K توكن** (768 × 1024) — وهي الحد المُستعمل في إعدادات النظام، مطابقةً لسعة سياق نماذج DeepSeek الكبيرة.
+- عند الوصول إليه، يستبدل Claude Code أقدم جزء من الحوار بملخّص بدل إنهاء الجلسة.
+- إن لم تضبطه، يسري الحد الافتراضي (أصغر من سعة النموذج) فتُضغط مبكراً وتفقد تفاصيل بدلًا من الاستفادة الكاملة من 786K.
+- **تعديل آمن:** يمكن رفع/خفض الرقم كيفما شئت — إنه مجرّد حد ضغط، لا سعة فعلية. ابدأ بـ 786432 ليطابق النموذج، وانزله إن لاحظت إبطاءً في الجلسات الطويلة.
 
 ## عيوب تكامل موثقة — ومرجع دفاعي
 
